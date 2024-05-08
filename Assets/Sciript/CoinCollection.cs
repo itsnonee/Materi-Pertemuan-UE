@@ -5,9 +5,16 @@ using TMPro;
 
 public class CoinCollection : MonoBehaviour
 {
-    private int coinCount = 0;
+    [Header("Text Score")]
     public TextMeshProUGUI scoreText;
     public GameObject canvasGame;
+
+    [Header("Audio Score")]
+    public AudioSource audioSource;
+    public AudioClip audioCoin;
+    public AudioClip audioWin;
+
+    private int coinCount = 0;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,13 +31,22 @@ public class CoinCollection : MonoBehaviour
             
             scoreText.text = "Coin: " + coinCount.ToString();
             
+            // Kondisi saat menang
             if (coinCount == 5 && canvasGame != null)
             {
+                // Aktifkan ui dan suara
                 canvasGame.SetActive(true);
+                audioSource.PlayOneShot(audioWin);
+
+                // Pause game
+                Time.timeScale = 0;
             }
 
             // Tampilkan jumlah koin di konsol
             Debug.Log("Total coins collected: " + coinCount);
+
+            // Mengaktifkan suara
+            audioSource.PlayOneShot(audioCoin);
         }
     }
 }

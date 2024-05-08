@@ -10,6 +10,7 @@ public class SceneController : MonoBehaviour
     {
         // Muat ulang scene saat ini untuk memulai permainan kembali
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1.0f;
     }
 
     // Metode untuk mengatur aksi tombol "Main Menu"
