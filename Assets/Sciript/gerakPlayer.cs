@@ -8,7 +8,10 @@ public class gerakPlayer : MonoBehaviour
     PlayerInput playerInput;
     InputAction moveAction;
 
-    [SerializeField] float speed = 5;
+    public float speed = 5;
+    public GameObject canvasGame;
+
+    public Transform pedang;
 
     void Start()
     {
@@ -27,5 +30,14 @@ public class gerakPlayer : MonoBehaviour
         Vector2 direction= moveAction.ReadValue<Vector2>();
         transform.position += new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime;
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Pastikan objek yang menyentuh memiliki tag "Coin"
+        if (other.CompareTag("Enemy"))
+        {
+            canvasGame.SetActive(true);
+        }
     }
 }

@@ -5,11 +5,9 @@ using TMPro;
 
 public class CoinCollection : MonoBehaviour
 {
-    [Header("Text Score")]
     public TextMeshProUGUI scoreText;
     public GameObject canvasGame;
 
-    [Header("Audio Score")]
     public AudioSource audioSource;
     public AudioClip audioCoin;
     public AudioClip audioWin;
