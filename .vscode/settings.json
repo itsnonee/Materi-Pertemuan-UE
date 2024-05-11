@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Materi.sln"
+    "dotnet.defaultSolution": "Materi-Pertemuan-UE.sln"
 }

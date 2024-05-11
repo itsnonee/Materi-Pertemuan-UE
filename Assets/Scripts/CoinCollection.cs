@@ -6,44 +6,46 @@ using TMPro;
 public class CoinCollection : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
-    public GameObject canvasGame;
+    public GameObject panelWin;
 
     public AudioSource audioSource;
     public AudioClip audioCoin;
     public AudioClip audioWin;
-
     private int coinCount = 0;
 
     private void OnTriggerEnter(Collider other)
     {
-        // Pastikan objek yang menyentuh memiliki tag "Coin"
+        // Melakukan pengecekan jika objek Player menyentuh objek yang memiliki tag "Coin", maka jalankan kode di bawah
         if (other.CompareTag("Coin"))
         {
-            // Tambahkan jumlah koin
+            // Tambahkan jumlah coin
             coinCount++;
 
-            // Hancurkan objek koin
+            // Hancurkan objek coin
             Destroy(other.gameObject);
 
             // Perbarui skor pada UI Canvas
-            
             scoreText.text = "Coin: " + coinCount.ToString();
-            
-            // Kondisi saat menang
-            if (coinCount == 5 && canvasGame != null)
+
+            // Ketika coin terkumpul sebanyak 5 dan objek panel Win tidak sama dengan null, maka jalankan kode di bawah
+            if (coinCount == 5 && panelWin != null) // kondisi menang
             {
-                // Aktifkan ui dan suara
-                canvasGame.SetActive(true);
+                // Aktifkan Panel Menang dan Suara ketika Menang
+                panelWin.SetActive(true);
                 audioSource.PlayOneShot(audioWin);
 
                 // Pause game
                 Time.timeScale = 0;
+
+                // Menampilkan kembali cursor
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
             }
 
-            // Tampilkan jumlah koin di konsol
+            // Tampilkan jumlah koin di console
             Debug.Log("Total coins collected: " + coinCount);
 
-            // Mengaktifkan suara
+            // Mengaktifkan suara setiap kali menyentuh coin
             audioSource.PlayOneShot(audioCoin);
         }
     }

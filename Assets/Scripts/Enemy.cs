@@ -5,12 +5,12 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public NavMeshAgent agent;
-    public Transform target;
+    public NavMeshAgent agent; // Enemy
+    public Transform target; // Player
 
     void Update()
     {
-        // Kejar player
+        // Membuat Enemy mengejar Player
         agent.SetDestination(target.position);
     }
 }
