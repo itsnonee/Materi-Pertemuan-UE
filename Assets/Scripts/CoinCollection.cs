@@ -8,7 +8,8 @@ public class CoinCollection : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public GameObject panelWin;
 
-    public AudioSource audioSource;
+    public AudioSource audioSourceBGM;
+    public AudioSource audioSourceSFX;
     public AudioClip audioCoin;
     public AudioClip audioWin;
     private int coinCount = 0;
@@ -32,7 +33,10 @@ public class CoinCollection : MonoBehaviour
             {
                 // Aktifkan Panel Menang dan Suara ketika Menang
                 panelWin.SetActive(true);
-                audioSource.PlayOneShot(audioWin);
+                audioSourceSFX.PlayOneShot(audioWin);
+
+                // Menonaktifkan suara background music
+                audioSourceBGM.Stop();
 
                 // Pause game
                 Time.timeScale = 0;
@@ -46,7 +50,7 @@ public class CoinCollection : MonoBehaviour
             Debug.Log("Total coins collected: " + coinCount);
 
             // Mengaktifkan suara setiap kali menyentuh coin
-            audioSource.PlayOneShot(audioCoin);
+            audioSourceSFX.PlayOneShot(audioCoin);
         }
     }
 }

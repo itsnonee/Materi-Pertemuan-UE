@@ -9,20 +9,30 @@ public class PlayerController : MonoBehaviour
     InputAction moveAction;
     public float speed = 5;
     public GameObject panelLose;
-    public AudioSource audioSource;
+    public AudioSource audioSourceBGM;
+    public AudioSource audioSourceSFX;
     public AudioClip audioLose;
+    public AudioClip audioStart;
+    public AudioClip audioBGM;
 
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions.FindAction("wasd");
 
+        // Mengaktifkan suara ketika game dimulai
+        audioSourceSFX.PlayOneShot(audioStart);
+
+        // Mengaktifkan suara background music ketika game dimulai dalam 1 detik
+        audioSourceBGM.clip = audioBGM;
+        audioSourceBGM.loop = true;
+        audioSourceBGM.Play();
+
         // Mematikan cursor ketika Game dimulai
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
     }
-
 
     void Update()
     {
@@ -45,13 +55,16 @@ public class PlayerController : MonoBehaviour
         {
             // Mengaktifkan panel Lose 
             panelLose.SetActive(true); // Kondisi kalah karena menyentuh Enemy
-            
+
             // Mengaktifkan suara ketika kalah
-            audioSource.PlayOneShot(audioLose);
-            
+            audioSourceSFX.PlayOneShot(audioLose);
+
+            // Menonaktifkan suara background music
+            audioSourceBGM.Stop();
+
             // Pause game
             Time.timeScale = 0;
-            
+
             // Menampilkan kembali cursor
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
