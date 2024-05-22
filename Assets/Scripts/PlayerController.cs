@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public AudioClip audioLose;
     public AudioClip audioStart;
     public AudioClip audioBGM;
+    public Animator playerAnim;
+    public Transform apake;
 
     void Start()
     {
@@ -38,6 +40,31 @@ public class PlayerController : MonoBehaviour
     {
         // Memanggil metode MovePlayer
         MovePlayer();
+        if(Input.GetKeyUp(KeyCode.W)){
+            playerAnim.SetTrigger("idle");
+            playerAnim.ResetTrigger("walk");
+
+        }
+        if(Input.GetKeyDown(KeyCode.W)){
+            playerAnim.SetTrigger("walk");
+            playerAnim.ResetTrigger("idle");
+
+        }
+        if(Input.GetKeyUp(KeyCode.W)){
+            playerAnim.SetTrigger("idle");
+            playerAnim.ResetTrigger("walk");
+
+        }
+        if(Input.GetKeyDown(KeyCode.W)){
+            playerAnim.SetTrigger("walk");
+            playerAnim.ResetTrigger("idle");
+
+        }
+        if(Input.GetKey(KeyCode.A)){
+            apake.Rotate(0, -speed* Time.deltaTime,0);
+        } if(Input.GetKey(KeyCode.D)){
+            apake.Rotate(0, speed* Time.deltaTime,0);
+        }
     }
 
     // Motode untuk Menggerakan Player
